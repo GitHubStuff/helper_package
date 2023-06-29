@@ -21,6 +21,7 @@ part 'source/time_picker.dart';
 enum PickerType {
   date,
   time,
+  dateTime,
 }
 
 const _diameterRatio = 1.5;

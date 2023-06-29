@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:helper_package/helper_package.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'screens/app_module.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Palette.setup();
 
-  runApp(
-    ModularApp(
+  runApp(ProviderScope(
+    child: ModularApp(
       module: AppModule(),
       child: const MyApp(),
     ),
-  );
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -19,6 +22,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Modular.setNavigatorKey(Global.navigatorKey);
     return MaterialApp.router(
       routeInformationParser: Modular.routeInformationParser,
       routerDelegate: Modular.routerDelegate,

@@ -15,6 +15,9 @@ dependencies:
   app_settings: ^4.2.0          # A Flutter plugin for opening iOS and Android phone settings from an app.
   cupertino_icons: ^1.0.5       # This is an asset repo for Cupertino widgets.
   flutter_modular: ^5.0.3       # Smart project structure with dependency injection and route management
+  helper_package:
+    path: ../
+  hooks_riverpod: ^2.3.6       # A simple way to manage state in your application
 
 # dart run build_runner build -d
 dev_dependencies:
