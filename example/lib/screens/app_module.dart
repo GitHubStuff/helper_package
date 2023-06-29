@@ -1,3 +1,4 @@
+import 'package:example/screens/clock_screen.dart';
 import 'package:example/screens/popover_screen.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -14,6 +15,7 @@ class AppModule extends Module {
   @override
   final List<ModularRoute> routes = [
     ChildRoute('/', child: (_, __) => const HomeScaffold()),
-    ChildRoute(PopoverScreen.route, child: (_, __) => const PopoverScreen())
+    ChildRoute(PopoverScreen.route, child: (_, __) => const PopoverScreen()),
+    ChildRoute(ClockScreen.route, child: (_, __) => const ClockScreen()),
   ];
 }

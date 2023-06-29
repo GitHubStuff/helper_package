@@ -46,15 +46,15 @@ class PopoverScreen extends StatelessWidget {
               child: Assets.images.ltmm1024x1024.image(),
             ),
           ),
-          const Button(
+          const _PopoverButton(
             caption: 'Set Date',
             pickerType: PickerType.date,
           ).paddingAll(8.0),
-          const Button(
+          const _PopoverButton(
             caption: 'Set Time',
             pickerType: PickerType.time,
           ).paddingAll(8.0),
-          const Button(
+          const _PopoverButton(
             caption: 'Both',
             pickerType: PickerType.dateTime,
           ).paddingAll(8.0),
@@ -64,18 +64,19 @@ class PopoverScreen extends StatelessWidget {
   }
 }
 
-class Button extends StatefulWidget {
-  const Button(
+class _PopoverButton extends StatefulWidget {
+  const _PopoverButton(
+      // ignore: unused_element
       {super.key,
       required this.caption,
       this.pickerType = PickerType.dateTime});
   final String caption;
   final PickerType pickerType;
   @override
-  State<Button> createState() => _Button();
+  State<_PopoverButton> createState() => _Button();
 }
 
-class _Button extends State<Button> {
+class _Button extends State<_PopoverButton> {
   late String caption;
 
   @override

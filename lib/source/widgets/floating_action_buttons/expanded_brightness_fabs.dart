@@ -2,9 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../global.dart';
-import '../palette/palette.dart';
-import '../palette/palette_enum.dart';
+import '../../../global.dart';
+import '../../palette/palette.dart';
+import '../../palette/palette_enum.dart';
 import 'expanded_brightness_fab.dart';
 
 List<Widget> buildExpandingActionButtons(

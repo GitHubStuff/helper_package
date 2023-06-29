@@ -1,5 +1,6 @@
 // ignore_for_file: sort_child_properties_last
 
+import 'package:example/screens/clock_screen.dart';
 import 'package:example/screens/popover_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -14,9 +15,8 @@ class HomeScaffold extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      body: homeWidget(context),
-      floatingActionButton: ExpandableFAB.ofModes(ref: ref, showToast: true)
-    );
+        body: homeWidget(context),
+        floatingActionButton: ExpandableFAB.ofModes(ref: ref, showToast: true));
   }
 
   Widget homeWidget(BuildContext context) {
@@ -33,10 +33,12 @@ class HomeScaffold extends ConsumerWidget {
             ),
           ),
           ElevatedButton(
-            onPressed: () {
-              Modular.to.pushNamed(PopoverScreen.route);
-            },
+            onPressed: () => Modular.to.pushNamed(PopoverScreen.route),
             child: const Text('Show Popover'),
+          ).paddingAll(8.0),
+          ElevatedButton(
+            onPressed: () => Modular.to.pushNamed(ClockScreen.route),
+            child: const Text('Show Clock'),
           ).paddingAll(8.0),
         ],
       ),
