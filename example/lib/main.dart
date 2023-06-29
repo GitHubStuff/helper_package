@@ -7,30 +7,34 @@ import 'screens/app_module.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Palette.setup();
+  await Palette.setup(); // <--- For persiting theme setting
+
+  Modular.setNavigatorKey(Global.navigatorKey);
 
   runApp(ProviderScope(
+    // <--- Riverpod
     child: ModularApp(
+      // <--- Modular
       module: AppModule(),
       child: const MyApp(),
     ),
   ));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    Modular.setNavigatorKey(Global.navigatorKey);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final currentTheme = ref.watch(paletteProvider);
     return MaterialApp.router(
       routeInformationParser: Modular.routeInformationParser,
       routerDelegate: Modular.routerDelegate,
       title: 'Flutter Demo',
       //locale: Language.locale,
-      theme: null,
-      darkTheme: null,
-      themeMode: null,
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
+      themeMode: currentTheme,
       localizationsDelegates: const [],
     );
   }

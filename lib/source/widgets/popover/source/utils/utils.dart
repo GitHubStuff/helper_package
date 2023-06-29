@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-import '../../../../global.dart';
+import '../../../../../global.dart';
 
 class Utils {
   static final Utils _singleton = Utils._();

@@ -4,17 +4,18 @@ import 'package:example/screens/popover_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:helper_package/helper_package.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../gen/assets.gen.dart';
 
-class HomeScaffold extends StatelessWidget {
+class HomeScaffold extends ConsumerWidget {
   const HomeScaffold({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: homeWidget(context),
-      floatingActionButton: null,
+      floatingActionButton: ExpandableFAB.ofModes(ref: ref, showToast: true)
     );
   }
 

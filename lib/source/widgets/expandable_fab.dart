@@ -1,5 +1,7 @@
 /// Creates a FAB button that when pressed will show all the [children] widgets in an arc
 /// around the FAB button. This enables the FAB to have multiple children/actions
+/// 
+/// factor ExpandableFAB.ofModes - creates a FAB with 3 children, each child is a mode
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';

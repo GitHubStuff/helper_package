@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-import '../global.dart';
+import '../../global.dart';
 
 /// Get a measure of the screen as percentage of the screen height
 class Responsive {

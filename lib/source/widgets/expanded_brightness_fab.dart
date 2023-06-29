@@ -4,7 +4,12 @@ import 'package:flutter/material.dart';
 
 @immutable
 class ExpandedBrightnessFAB extends StatelessWidget {
-  const ExpandedBrightnessFAB({super.key, this.onPressed, required this.icon, this.tooltip});
+  const ExpandedBrightnessFAB({
+    super.key,
+    this.onPressed,
+    required this.icon,
+    this.tooltip,
+  });
 
   final VoidCallback? onPressed;
   final Widget icon;
