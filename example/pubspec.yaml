@@ -1,4 +1,4 @@
-name: app_template
+name: example
 description: A new Flutter template.
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -16,7 +16,7 @@ dependencies:
   cupertino_icons: ^1.0.5       # This is an asset repo for Cupertino widgets.
   flutter_modular: ^5.0.3       # Smart project structure with dependency injection and route management
 
-# flutter pub run build_runner build -d
+# dart run build_runner build -d
 dev_dependencies:
   build_runner: ^2.3.3              # provides a concrete way of generating files using Dart code
   flutter_gen_runner: ^5.3.1        # The Flutter code generator for your assets, fonts, colors
