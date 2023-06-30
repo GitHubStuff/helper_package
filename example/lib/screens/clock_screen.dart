@@ -36,39 +36,31 @@ class ClockScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox.square(
+            ClockFace(
               dimension: dimension,
-              child: const ClockFace(
-                utcOffset: -7,
-                faceColor: Colors.purple,
-                backgroundColor: Colors.transparent,
-                secondColor: Colors.white70,
-                faceNumberOffset: 20.0,
-                tickColor: Colors.white,
-                hourColor: Colors.yellow,
-                minuteColor: Colors.yellow,
-                numberStyle: TextStyle(color: Colors.white, fontSize: 16.0),
-              ),
+              utcMinuteOffset: -7 * 60,
+              backgroundColor: Colors.yellow,
+              secondColor: Colors.green,
+              faceNumberOffset: 20.0,
+              numberStyle: const TextStyle(
+                  color: Colors.purple,
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.bold),
             ).paddingAll(8.0),
-            SizedBox.square(
+            ClockFace(
               dimension: dimension,
-              child: const ClockFace(
-                utcOffset: -4,
-                faceColor: Colors.white,
-                backgroundColor: Colors.transparent,
-                secondColor: Colors.red,
-                faceNumberOffset: 20.0,
-              ),
+              faceColor: Colors.white,
+              backgroundColor: Colors.transparent,
+              //secondColor: Colors.black87,
+              faceNumberOffset: 20.0,
             ).paddingAll(8.0),
-            SizedBox.square(
+            ClockFace(
               dimension: dimension,
-              child: const ClockFace(
-                utcOffset: 2,
-                faceColor: Colors.white,
-                backgroundColor: Colors.transparent,
-                secondColor: Colors.red,
-                faceNumberOffset: 20.0,
-              ),
+              utcMinuteOffset: 2 * 60,
+              faceColor: Colors.white,
+              backgroundColor: Colors.transparent,
+              secondColor: Colors.red,
+              //faceNumberOffset: 12.0,
             ).paddingAll(8.0),
           ],
         ),

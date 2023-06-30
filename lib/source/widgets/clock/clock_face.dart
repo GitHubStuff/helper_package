@@ -2,9 +2,11 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:helper_package/helper_package.dart';
 
 class ClockFace extends StatelessWidget {
-  final int utcOffset;
+  final int? utcMinuteOffset;
+  final double dimension;
   final Color faceColor;
   final Color tickColor;
   final Color hourColor;
@@ -17,34 +19,35 @@ class ClockFace extends StatelessWidget {
 
   const ClockFace({
     super.key,
-    this.utcOffset = -4,
+    this.utcMinuteOffset,
+    this.dimension = 100.0,
     this.faceColor = Colors.white,
     this.tickColor = Colors.black,
     this.hourColor = Colors.black,
     this.minuteColor = Colors.black,
     this.secondColor,
-    this.numberStyle = const TextStyle(color: Colors.black, fontSize: 16.0),
+    this.numberStyle = const TextStyle(color: Colors.black, fontSize: 12.0),
     this.backgroundColor = Colors.transparent,
-    this.faceNumberOffset = 15.0,
+    this.faceNumberOffset = 12.0,
     this.tickStroke = 1.0,
   });
 
   @override
   Widget build(BuildContext context) {
     assert(tickStroke >= 1.0);
-
+    final utcOffset =
+        utcMinuteOffset ?? DateTime.now().timeZoneOffset.inMinutes;
     final initalDateTime =
         DateTime.now().toUtc().add(Duration(hours: utcOffset));
     return StreamBuilder(
-      stream: Stream.periodic(
-          secondColor == null
-              ? const Duration(minutes: 1)
-              : const Duration(seconds: 1), (_) {
-        return DateTime.now().toUtc().add(Duration(hours: utcOffset));
+      stream: Stream.periodic(const Duration(seconds: 1), (_) {
+        return DateTime.now().toUtc().add(Duration(minutes: utcOffset));
       }),
-      initialData: DateTime.now().toUtc().add(Duration(hours: utcOffset)),
+      initialData: DateTime.now().toUtc().add(Duration(minutes: utcOffset)),
       builder: (BuildContext context, AsyncSnapshot<DateTime> snapshot) {
         return Container(
+          height: dimension,
+          width: dimension,
           color: backgroundColor,
           child: CustomPaint(
             painter: _ClockPainter(
@@ -58,7 +61,7 @@ class ClockFace extends StatelessWidget {
               faceNumberOffset: faceNumberOffset,
               tickStroke: tickStroke,
             ),
-          ),
+          ).paddingAll(4.0),
         );
       },
     );
