@@ -4,18 +4,37 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:helper_package/helper_package.dart';
 
+part 'clock_painter.dart';
+
+/// ClockFace
+/// Displays a clock face with hour, minute, and optional second hands.
+/// The clock face can be configured to display the time in any time zone (default is local).
+/// * [backgroundColor] - the color of the background
+/// * [dimension] - the height and width of the clock face
+/// * [faceColor] - the color of the clock face
+/// * [faceNumberOffset] - the offset of the numbers from the edge of the clock face
+/// * [hourColor] - the color of the hour hand
+/// * [minuteColor] - the color of the minute hand
+/// * [numberStyle] - the style of the numbers on the clock face
+/// * [secondColor] - the color of the second hand (null to not display)
+/// * [tickColor] - the color of the tick marks
+/// * [tickStroke] - the width of the tick marks
+/// * [utcMinuteOffset] - the number of minutes offset from UTC (e.g. -7 hours is -7 * 60)
+/// * [borderColor] - the color of the border
+///
 class ClockFace extends StatelessWidget {
-  final int? utcMinuteOffset;
-  final double dimension;
+  final Color backgroundColor;
   final Color faceColor;
-  final Color tickColor;
   final Color hourColor;
   final Color minuteColor;
+  final Color tickColor;
+  final Color borderColor;
   final Color? secondColor;
-  final TextStyle? numberStyle;
-  final Color backgroundColor;
-  final double? faceNumberOffset;
+  final double dimension;
   final double tickStroke;
+  final double? faceNumberOffset;
+  final int? utcMinuteOffset;
+  final TextStyle? numberStyle;
 
   const ClockFace({
     super.key,
@@ -25,6 +44,7 @@ class ClockFace extends StatelessWidget {
     this.tickColor = Colors.black,
     this.hourColor = Colors.black,
     this.minuteColor = Colors.black,
+    this.borderColor = Colors.black,
     this.secondColor,
     this.numberStyle = const TextStyle(color: Colors.black, fontSize: 12.0),
     this.backgroundColor = Colors.transparent,
@@ -58,6 +78,7 @@ class ClockFace extends StatelessWidget {
               minuteColor: minuteColor,
               secondColor: secondColor,
               numberStyle: numberStyle,
+              borderColor: borderColor,
               faceNumberOffset: faceNumberOffset,
               tickStroke: tickStroke,
             ),
@@ -68,140 +89,3 @@ class ClockFace extends StatelessWidget {
   }
 }
 
-class _ClockPainter extends CustomPainter {
-  final DateTime dateTime;
-  final Color faceColor;
-  final Color tickColor;
-  final Color hourColor;
-  final Color minuteColor;
-  final Color? secondColor;
-  final TextStyle? numberStyle;
-  final double? faceNumberOffset;
-  final double tickStroke;
-
-  _ClockPainter({
-    required this.dateTime,
-    required this.faceColor,
-    required this.tickColor,
-    required this.hourColor,
-    required this.minuteColor,
-    required this.secondColor,
-    required this.numberStyle,
-    required this.faceNumberOffset,
-    required this.tickStroke,
-  });
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final center = Offset(size.width / 2, size.height / 2);
-    final radius = min(size.width / 2, size.height / 2);
-    final strokeWidth = radius / 20;
-    final shortTickLength = radius / 20;
-    final longTickLength = radius / 10;
-
-    // Draw the clock face
-    canvas.drawCircle(center, radius, Paint()..color = faceColor);
-
-    final textPainter = TextPainter(
-      textAlign: TextAlign.center,
-      textDirection: TextDirection.ltr,
-    );
-
-    // Draw the hour and minute ticks
-    for (var i = 0; i < 60; i++) {
-      final tickLength = i % 5 == 0 ? longTickLength : shortTickLength;
-      final tickPosition = Offset(
-        center.dx + (radius - tickLength) * cos(i * pi / 30),
-        center.dy + (radius - tickLength) * sin(i * pi / 30),
-      );
-      final tickEndPosition = Offset(
-        center.dx + radius * cos(i * pi / 30),
-        center.dy + radius * sin(i * pi / 30),
-      );
-
-      canvas.drawLine(
-        tickPosition,
-        tickEndPosition,
-        Paint()
-          ..color = tickColor
-          ..strokeWidth = tickStroke,
-      );
-
-      // Draw the hour numbers
-      if (numberStyle != null && i % 5 == 0) {
-        final numberRadius = radius - (faceNumberOffset ?? 0);
-        final numberPosition = Offset(
-          center.dx + numberRadius * cos((i - 15) * pi / 30),
-          center.dy + numberRadius * sin((i - 15) * pi / 30),
-        );
-
-        textPainter.text = TextSpan(
-          text: '${i ~/ 5 == 0 ? 12 : i ~/ 5}',
-          style: numberStyle,
-        );
-        textPainter.layout();
-        textPainter.paint(
-          canvas,
-          numberPosition -
-              Offset(textPainter.width / 2, textPainter.height / 2),
-        );
-      }
-    }
-
-    // Draw the hour hand
-    final hourHandAngle = dateTime.hour * pi / 6 + dateTime.minute * pi / 360;
-    final hourHandLength = radius / 2;
-    final hourHandPosition = Offset(
-      center.dx + hourHandLength * cos(hourHandAngle - pi / 2),
-      center.dy + hourHandLength * sin(hourHandAngle - pi / 2),
-    );
-
-    canvas.drawLine(
-      center,
-      hourHandPosition,
-      Paint()
-        ..color = hourColor
-        ..strokeWidth = strokeWidth,
-    );
-
-    // Draw the minute hand
-    final minuteHandAngle = dateTime.minute * pi / 30;
-    final minuteHandLength = radius * 3 / 4;
-    final minuteHandPosition = Offset(
-      center.dx + minuteHandLength * cos(minuteHandAngle - pi / 2),
-      center.dy + minuteHandLength * sin(minuteHandAngle - pi / 2),
-    );
-
-    canvas.drawLine(
-      center,
-      minuteHandPosition,
-      Paint()
-        ..color = minuteColor
-        ..strokeWidth = strokeWidth / 2,
-    );
-
-    // Draw the minute hand
-    if (secondColor == null) {
-      return;
-    }
-    final secondHandAngle = dateTime.second * pi / 30;
-    final secondHandLength = radius * 4 / 5;
-    final secondHandPosition = Offset(
-      center.dx + secondHandLength * cos(secondHandAngle - pi / 2),
-      center.dy + secondHandLength * sin(secondHandAngle - pi / 2),
-    );
-
-    canvas.drawLine(
-      center,
-      secondHandPosition,
-      Paint()
-        ..color = secondColor!
-        ..strokeWidth = strokeWidth / 3,
-    );
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return true;
-  }
-}
