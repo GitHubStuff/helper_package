@@ -1,4 +1,5 @@
 import 'dart:ffi' hide Size;
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 
@@ -13,25 +14,61 @@ extension BuildContextExtensions<T> on BuildContext {
   TextTheme get primaryTextTheme => appTheme.primaryTextTheme;
   TextTheme get textTheme => appTheme.textTheme;
   ThemeData get appTheme => Theme.of(this);
-  List<Locale>? get locales => findAncestorWidgetOfExactType<MaterialApp>()?.supportedLocales.toList();
+  List<Locale>? get locales =>
+      findAncestorWidgetOfExactType<MaterialApp>()?.supportedLocales.toList();
 
-  void hideKeyboard() => !FocusScope.of(this).hasPrimaryFocus ? FocusScope.of(this).unfocus() : Void;
+  void hideKeyboard() => !FocusScope.of(this).hasPrimaryFocus
+      ? FocusScope.of(this).unfocus()
+      : Void;
 
   bool get isMobile => MediaQuery.of(this).size.width <= 500.0;
 
-  bool get isTablet => MediaQuery.of(this).size.width < 1024.0 && MediaQuery.of(this).size.width >= 650.0;
+  bool get isTablet =>
+      MediaQuery.of(this).size.width < 1024.0 &&
+      MediaQuery.of(this).size.width >= 650.0;
 
-  bool get isSmallTablet => MediaQuery.of(this).size.width < 650.0 && MediaQuery.of(this).size.width > 500.0;
+  bool get isSmallTablet =>
+      MediaQuery.of(this).size.width < 650.0 &&
+      MediaQuery.of(this).size.width > 500.0;
 
   bool get isDesktop => MediaQuery.of(this).size.width >= 1024.0;
 
-  bool get isSmall => MediaQuery.of(this).size.width < 850.0 && MediaQuery.of(this).size.width >= 560.0;
+  bool get isSmall =>
+      MediaQuery.of(this).size.width < 850.0 &&
+      MediaQuery.of(this).size.width >= 560.0;
 
   double get width => MediaQuery.of(this).size.width;
 
   double get height => MediaQuery.of(this).size.height;
 
   Size get size => MediaQuery.of(this).size;
+
+/// Responsive width
+  double responsivHeight(
+    double h, {
+    double minHeight = 0.0,
+    double maxHeight = double.infinity,
+    double? overrideHeight,
+  }) {
+    assert(h >= 0.0 && h <= 1.0);
+    assert(minHeight >= 0, 'Invalid minWidth: $minHeight');
+    assert(maxHeight >= 0, 'Invalid maxWidth: $maxHeight');
+    double targetHeight = (overrideHeight != null) ? overrideHeight : width;
+    return max(minHeight, min(maxHeight, targetHeight * h));
+  }
+  /// Responsive width
+  double responsiveWidth(
+    double w, {
+    double minWidth = 0.0,
+    double maxWidth = double.infinity,
+    double? overrideWidth,
+  }) {
+    assert(w >= 0.0 && w <= 1.0);
+    assert(minWidth >= 0, 'Invalid minWidth: $minWidth');
+    assert(maxWidth >= 0, 'Invalid maxWidth: $maxWidth');
+    double targetWidth = (overrideWidth != null) ? overrideWidth : width;
+    return max(minWidth, min(maxWidth, targetWidth * w));
+  }
 
   /// Set appbar title to String, Widget, [Widgets], Image, AssetImage, TextStyle
   ///
@@ -47,7 +84,8 @@ extension BuildContextExtensions<T> on BuildContext {
   ///
   ///  AppBar(title: context.appBarWidgets(Image(...), AssetImage(...)));
   ///
-  Row appBarWidgets(dynamic stuff, {EdgeInsetsGeometry? padding, double appBarHeight = 32.0}) {
+  Row appBarWidgets(dynamic stuff,
+      {EdgeInsetsGeometry? padding, double appBarHeight = 32.0}) {
     assert(stuff != null);
     assert(appBarHeight >= 0.0);
     List<dynamic> items = (stuff is List) ? stuff : [stuff];
@@ -119,7 +157,8 @@ extension BuildContextExtensions<T> on BuildContext {
 
   TextStyle? get titleTextStyle => Theme.of(this).appBarTheme.titleTextStyle;
 
-  TextStyle? get bodyExtraSmall => bodySmall?.copyWith(fontSize: 10, height: 1.6, letterSpacing: .5);
+  TextStyle? get bodyExtraSmall =>
+      bodySmall?.copyWith(fontSize: 10, height: 1.6, letterSpacing: .5);
 
   TextStyle? get bodyLarge => Theme.of(this).textTheme.bodyLarge;
 
@@ -173,7 +212,8 @@ extension BuildContextExtensions<T> on BuildContext {
     );
   }
 
-  ScaffoldFeatureController<SnackBar, SnackBarClosedReason> showSnackBar(String message) {
+  ScaffoldFeatureController<SnackBar, SnackBarClosedReason> showSnackBar(
+      String message) {
     return ScaffoldMessenger.of(this).showSnackBar(
       SnackBar(
         content: Text(message),
