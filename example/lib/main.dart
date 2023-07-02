@@ -9,12 +9,13 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Palette.setup(); // <--- For persiting theme setting
 
+  // <--- Modular : creates a global context variable Global.context
   Modular.setNavigatorKey(Global.navigatorKey);
 
+  // <--- Riverpod
   runApp(ProviderScope(
-    // <--- Riverpod
+    // <--- Modular
     child: ModularApp(
-      // <--- Modular
       module: AppModule(),
       child: const MyApp(),
     ),
