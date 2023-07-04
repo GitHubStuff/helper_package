@@ -16,6 +16,8 @@ export 'source/palette/palette_enum.dart';
 export 'source/palette/palette.dart';
 export 'source/widgets/clock/clock_face.dart';
 export 'source/widgets/floating_action_buttons/expandable_fab.dart';
+export 'source/widgets/pictures/image_picker_screen.dart';
+export 'source/widgets/pictures/image_picker_widget.dart';
 export 'source/widgets/popover_datetime_picker/popover_datetime_picker.dart';
 export 'source/widgets/popover/source/popover_direction.dart';
 export 'source/widgets/popover/source/popover_transition.dart';

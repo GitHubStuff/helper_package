@@ -40,6 +40,14 @@ class HomeScaffold extends ConsumerWidget {
             onPressed: () => Modular.to.pushNamed(ClockScreen.route),
             child: const Text('Show Clock'),
           ).paddingAll(8.0),
+          ElevatedButton(
+            onPressed: () async {
+              final String? path =
+                  await Modular.to.pushNamed<String>(PictureScreen.route);
+              debugPrint(path ?? 'No path returned');
+            },
+            child: const Text("Pick a picture"),
+          ),
         ],
       ),
     );
