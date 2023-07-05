@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import '../../extensions/stateful_widget_extension.dart';
 import '../popover/source/popover.dart';
 import '/source/extensions/widget_extensions.dart';
 import '/source/extensions/date_time_extensions.dart';
@@ -10,7 +11,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import '../../palette/palette.dart';
-import '../observing_stateful_widget.dart';
 
 part 'source/date_picker.dart';
 part 'source/date_time_header.dart';
