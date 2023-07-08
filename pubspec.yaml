@@ -1,19 +1,21 @@
 name: helper_package
 description: A new Flutter package project.
-version: 0.0.1
+version: 0.0.3
 homepage: https://icodeforyou.com
 
 environment:
   sdk: '>=3.0.5 <4.0.0'
-  flutter: ">=3.7.6"
+  flutter: ">=3.10.5"
 
 dependencies:
   flutter:
     sdk: flutter
-  hive_flutter: ^1.1.0          # Lightweight and blazing fast key-value database written 
-  hooks_riverpod: ^2.3.6        # A state-management library
-  intl: ^0.18.1                 # For DateTime extensions
-  riverpod_annotation: ^2.1.1   # This is a side package for riverpod_generator, exposing annotations
+  flutter_modular: ^5.0.3         # Smart project structure with dependency injection and route management
+  hive_flutter: ^1.1.0            # Lightweight and blazing fast key-value database written 
+  hooks_riverpod: ^2.3.6          # A state-management library
+  intl: ^0.18.1                   # For DateTime extensions
+  path_provider: ^2.0.15          # Flutter plugin for getting commonly used locations on the Android & iOS file systems
+  riverpod_annotation: ^2.1.1     # This is a side package for riverpod_generator, exposing annotations
 
 # dart run build_runner build -d
 dev_dependencies:

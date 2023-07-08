@@ -47,5 +47,12 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>YOUR_APP_NAME requires access to the camera to take photos.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>YOUR_APP_NAME requires access to the photo library to select photos.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>YOUR_APP_NAME requires write-access to your photo library to save photos.</string>
+
 </dict>
 </plist>
