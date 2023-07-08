@@ -1,7 +1,6 @@
 import 'package:example/screens/clock_screen.dart';
 import 'package:example/screens/popover_screen.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:helper_package/helper_package.dart';
 
 import 'home_scaffold.dart';
 
@@ -18,6 +17,5 @@ class AppModule extends Module {
     ChildRoute('/', child: (_, __) => const HomeScaffold()),
     ChildRoute(PopoverScreen.route, child: (_, __) => const PopoverScreen()),
     ChildRoute(ClockScreen.route, child: (_, __) => const ClockScreen()),
-    ChildRoute(PictureScreen.route, child: (_, __) => const PictureScreen()),
   ];
 }

@@ -1,6 +1,6 @@
 name: helper_package
 description: A new Flutter package project.
-version: 0.0.2
+version: 0.0.3
 homepage: https://icodeforyou.com
 
 environment:
@@ -10,15 +10,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_image_compress: ^2.0.3  # Flutter plugin for cropping and getting the file path of the cropped image
   flutter_modular: ^5.0.3         # Smart project structure with dependency injection and route management
   hive_flutter: ^1.1.0            # Lightweight and blazing fast key-value database written 
   hooks_riverpod: ^2.3.6          # A state-management library
-  image_picker: ^1.0.0            # Flutter plugin for selecting images from the Android and iOS image library
   intl: ^0.18.1                   # For DateTime extensions
   path_provider: ^2.0.15          # Flutter plugin for getting commonly used locations on the Android & iOS file systems
   riverpod_annotation: ^2.1.1     # This is a side package for riverpod_generator, exposing annotations
-  uuid: ^3.0.7                    # RFC4122 (v1, v4, v5) UUID Generator and Parser for Web, VM, Flutter
 
 # dart run build_runner build -d
 dev_dependencies:
