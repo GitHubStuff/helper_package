@@ -7,15 +7,13 @@ import 'home_scaffold.dart';
 class AppModule extends Module {
   // Provide a list of dependencies to inject into your project
   @override
-  final List<Bind> binds = [
-    //
-  ];
+  void binds(i) {}
 
   // Provide all the routes for your module
   @override
-  final List<ModularRoute> routes = [
-    ChildRoute('/', child: (_, __) => const HomeScaffold()),
-    ChildRoute(PopoverScreen.route, child: (_, __) => const PopoverScreen()),
-    ChildRoute(ClockScreen.route, child: (_, __) => const ClockScreen()),
-  ];
+  void routes(r) {
+    r.child('/', child: (_) => const HomeScaffold());
+    r.child(PopoverScreen.route, child: (_) => const PopoverScreen());
+    r.child(ClockScreen.route, child: (_) => const ClockScreen());
+  }
 }

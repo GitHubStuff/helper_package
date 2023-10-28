@@ -10,7 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_modular: ^5.0.3         # Smart project structure with dependency injection and route management
+  flutter_modular: ^6.3.2         # Smart project structure with dependency injection and route management
   hive_flutter: ^1.1.0            # Lightweight and blazing fast key-value database written 
   hooks_riverpod: ^2.3.6          # A state-management library
   intl: ^0.18.1                   # For DateTime extensions
@@ -21,7 +21,7 @@ dependencies:
 dev_dependencies:
   build_runner: ^2.4.5
   flutter_gen_runner: ^5.3.1
-  flutter_lints: ^2.0.1
+  flutter_lints: ^2.0.3
   flutter_test:
     sdk: flutter
   riverpod_generator: ^2.2.3        # Different syntax for defining "providers" by relying on code generation.
